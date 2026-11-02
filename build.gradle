@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.volumelauncher'
+version = project.mod_version
+
+base {
+    archivesName = 'volume-client'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+}
+
+dependencies {
+    compileOnly "net.fabricmc:fabric-loader:${project.loader_version}"
+    compileOnly "net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7"
+    compileOnly fileTree(dir: "${System.getProperty('user.home')}/AppData/Roaming/VolumeLauncher/minecraft/versions/26.3", include: ['*.jar'])
+    compileOnly fileTree(dir: "${System.getProperty('user.home')}/AppData/Roaming/VolumeLauncher/minecraft/libraries", include: ['**/*.jar'])
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'minecraft_version', project.minecraft_version
+    inputs.property 'loader_version', project.loader_version
+
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version,
+                'minecraft_version': project.minecraft_version,
+                'loader_version': project.loader_version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.base.archivesName.get()}"}
+    }
+}

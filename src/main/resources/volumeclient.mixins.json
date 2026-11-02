@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.volumelauncher.client.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "TitleScreenMixin",
+    "HudMixin",
+    "KeyboardHandlerMixin",
+    "MinecraftMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

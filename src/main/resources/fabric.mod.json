@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "volume-client",
+  "version": "1.0.0",
+  "name": "Volume Client",
+  "description": "Earthy parchment-themed Fabric client for Minecraft 26.3 integrated with Volume Launcher.",
+  "authors": [
+    "Rudra",
+    "Volume Client Team"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Rudra89-ux/Volume-Launcher"
+  },
+  "license": "MIT",
+  "icon": "assets/volumeclient/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.volumelauncher.client.VolumeClient"
+    ],
+    "preLaunch": [
+      "com.volumelauncher.client.VolumeClientPreLaunch"
+    ]
+  },
+  "mixins": [
+    "volumeclient.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "26.3"
+  }
+}
